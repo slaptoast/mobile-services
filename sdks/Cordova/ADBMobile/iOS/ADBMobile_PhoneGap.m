@@ -678,7 +678,7 @@
 		
 		NSString* fileName = getArg(command.arguments[0]);
 		NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
-		[ADBMobile overrideConfigPath:filePath];
+		[ADBMobile overrideConfigPath:NSBundle.MainBundle.BundlePath + "/" + filePath];
 		
 		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:fileName];
 		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
