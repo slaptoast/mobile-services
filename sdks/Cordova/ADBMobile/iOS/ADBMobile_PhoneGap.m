@@ -671,7 +671,7 @@
 
 - (void)overrideConfig:(CDVInvokedUrlCommand*)command {
 	[self.commandDelegate runInBackground:^{
-		if(!checkArgsWithTypes(command.arguments, @[@[DICTIONARY]])) {
+		if(!checkArgsWithTypes(command.arguments, @[@[STRING]])) {
 			[self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR] callbackId:command.callbackId];
 			return;
 		}
