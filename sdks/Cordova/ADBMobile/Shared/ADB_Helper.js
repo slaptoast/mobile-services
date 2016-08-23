@@ -184,6 +184,10 @@ var ADB = (function () {
 		return cordova.exec(success, fail, "ADBMobile_PhoneGap", "visitorSyncIdentifiers", [identifiers]);
 	};
 
+	ADB.overrideConfig = function(configName, success, fail) {
+		return cordova.exec(success, fail, "ADBMobile_PhoneGap", "overrideConfig", [configName]);
+	};
+
 	/*
 	*	iOS methods
 	*/

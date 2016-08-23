@@ -669,6 +669,21 @@
 	}];
 }
 
+- (void)overrideConfig:(CDVInvokedUrlCommand*)command {
+	[self.commandDelegate runInBackground:^{
+		if(!checkArgsWithTypes(command.arguments, @[@[DICTIONARY]])) {
+			[self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR] callbackId:command.callbackId];
+			return;
+		}
+		
+		NSString* fileName = getArg(command.arguments[0]);
+		NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+		[ADBMobile overrideConfigPath:filePath];
+		
+		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:fileName];
+		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+	}];
+}
 /*
  * Helper functions
  */

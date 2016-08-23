@@ -63,4 +63,5 @@
 - (void)audienceReset:(CDVInvokedUrlCommand*)command;
 - (void)visitorGetMarketingCloudId:(CDVInvokedUrlCommand*)command;
 - (void)visitorSyncIdentifiers:(CDVInvokedUrlCommand*)command;
+- (void)overrideConfig:(CDVInvokedUrlCommand*)command;
 @end

@@ -158,6 +158,9 @@ public class ADBMobile_PhoneGap extends CordovaPlugin {
         } else if (action.equals("visitorSyncIdentifiers")) {
             this.visitorSyncIdentifiers(args, callbackContext);
             return true;
+        } else if (action.equals("overrideConfig")) {
+            this.overrideConfig(args, callbackContext);
+            return true;
         }
 
         return false;
@@ -218,6 +221,24 @@ public class ADBMobile_PhoneGap extends CordovaPlugin {
                         break;
                     default:
                         callbackContext.error("Privacy Status was an unknown value");
+                }
+            }
+        });
+    }
+
+    private void overrideConfig(JSONArray args, final CallbackContext callbackContext) {
+        final String configName = args.getString(0);
+
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    InputStream configInput = getAssets().open(configName);
+                    Config.overrideConfigStream(configInput);
+                    callbackContext.success("overrideConfigStream successfully set to: " + configName);
+                    } catch (IOException ex) {
+                        callbackContext.error("Error in overrideConfigStream: " + ex.getMessage());
+                    // do something with the exception if needed
                 }
             }
         });
